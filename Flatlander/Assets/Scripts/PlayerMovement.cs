@@ -4,22 +4,46 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float MovementSpeed;
-    public float RotationSpeed;
-    public CharacterController controller;
+    public float movementSpeed;
+    public float rotationSpeed;
+    public Rigidbody rb;
+
+    private float inputX;
+    private float inputZ;
 
     private Vector3 rotation;
+
+    void Start()
+    {
+        rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+    }
 
     // Update is called once per frame
     void Update()
     {
-        float inputX = Input.GetAxisRaw("Horizontal");
-        float inputZ = Input.GetAxisRaw("Vertical");
+        inputX = Input.GetAxisRaw("Horizontal");
+        inputZ = Input.GetAxisRaw("Vertical");
+    }
 
-        controller.Move(transform.forward * inputZ * Time.deltaTime * MovementSpeed);
+    void FixedUpdate()
+    {
+        MovePlayer();
+        RotatePlayer();
+    }
 
-        rotation = new Vector3(0, inputX * RotationSpeed * Time.deltaTime, 0);
-        controller.transform.Rotate(rotation);
-        transform.Rotate(rotation);
+    void MovePlayer()
+    {
+        rb.velocity = transform.forward * Mathf.Clamp01(inputZ) * movementSpeed;
+    }
+
+    void RotatePlayer()
+    {
+        float rotation = inputX * rotationSpeed;
+        rb.MoveRotation(transform.rotation * Quaternion.Euler(transform.up * rotation));
+    }
+
+    void OnCollisionExit(Collision collisionInfo)
+    {
+        rb.angularVelocity = Vector3.zero;
     }
 }
