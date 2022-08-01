@@ -230,6 +230,7 @@ GameObject:
   m_Component:
   - component: {fileID: 422735407}
   - component: {fileID: 422735408}
+  - component: {fileID: 422735409}
   m_Layer: 0
   m_Name: First Person Camera
   m_TagString: Untagged
@@ -295,6 +296,21 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &422735409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 422735406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36f9fbc13aa37aa48b681e08bac190a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  horizontalStretch: 1
+  verticalStretch: 10000
+  shearing: {x: 0, y: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
